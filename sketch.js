@@ -1,29 +1,51 @@
+//Canvas Props
 let containerSize = 400;
 let canvasSize = containerSize + 10;
 let containerX = canvasSize / 2;
 let containerY = canvasSize / 2;
 let ballSize = containerSize / 6;
-let balls = [];
+//AnimationProps
 let picking = false;
+let pickTime = 0;
+//Dom Elements
+let teamInput;
+let teamText;
+let teamsRemaining;
+//ADD LIST REFERENCE HERE
+
+//State Objects
+let balls = [];
+let teams = [];
+let selectedBalls = [];
+
+document.body.onload = function() {
+  getTeamsFromLocalStorage();
+  teamInput = document.getElementById("teams-edit");
+  teamText = document.getElementById("teams");
+  teamsRemaining = document.getElementById("remaining-teams");
+
+  var teamString = teams.join(',');
+  teamInput.value = teamString;
+  teamText.textContent = teamString;
+}
 
 function setup() {
   createCanvas(canvasSize, canvasSize);
-  let names = [
-    "bob",
-    "mike",
-    "carl",
-    "frank",
-    "james",
-    "carl",
-    "desusj",
-    "fin",
-    "red",
-    "bar",
-    "kramer",
-    "jay",
-  ];
+  initializeTeams();
+  pickAlert("");
+  render();
+}
 
-  for (var name of names) {
+function getTeamsFromLocalStorage() {
+  let teamStorage = localStorage.getItem("teams");
+  if (teamStorage)
+    teams = teamStorage.split(',').filter(Boolean);
+}
+
+function initializeTeams() {
+  getTeamsFromLocalStorage();
+  balls = [];
+  for (var name of teams) {
     balls.push(
       new Ball(
         name,
@@ -37,30 +59,22 @@ function setup() {
       )
     );
   }
-  pickAlert("");
+  setTeamsLeft();
   render();
 }
 
-let pickTime = 0;
-let scaling = false;
-let selectedBalls = [];
-
 function draw() {
-  //background('#fff');
   if (pickTime > 2000) {
     picking = false;
     pickTime = 0;
-    
-    balls.sort((b1, b2) => b1.distance-b2.distance);
+
+    balls.sort((b1, b2) => b1.distance - b2.distance);
     var pick = balls.shift();
-    
+
     pickAlert(pick.name);
     addToPickList(pick.name);
-    
-  }
-  
-  if(scaling){
-    
+
+    setTeamsLeft();
   }
 
   if (picking) {
@@ -70,45 +84,73 @@ function draw() {
 }
 
 function render() {
-  DrawBowl();
-  MoveBalls();
-  DrawOuterRing();
+  //background('#f00');
+  strokeWeight(1);
+  fill("#0f0");
+  circle(containerX, containerY, containerSize);
+
+  balls.forEach((ball) => {
+    ball.move(deltaTime);
+    ball.display();
+  });
+
+  noFill();
+  strokeWeight(10);
+  circle(containerX, containerY, containerSize - 10);
+}
+
+function editTeams(caller) {
+  if (caller.value != "save") {
+    //Add/edit is called
+    caller.value = "save";
+    teamText.style.display = "none";
+    teamInput.style.display = "inline";
+    teamInput.setSelectionRange(teamText.textContent.length, teamText.textContent.length);
+    teamInput.focus();
+  }
+  else {
+    //Save was called
+    caller.value = "add";
+    teamText.style.display = "inline";
+    teamInput.style.display = "none";
+
+    teamInput.value = teamInput.value.toUpperCase();
+    teamText.textContent = teamInput.value;
+    localStorage.setItem("teams", teamInput.value);
+    initializeTeams();
+    clearPickList();
+  }
+}
+
+function setTeamsLeft() {
+  const remainingNames = balls.map(i => i.name);
+  teamsRemaining.textContent = "Teams left:" + remainingNames.sort();
 }
 
 function makePick() {
-  picking = true;
-  pickAlert("");
+  if (balls.length > 0) {
+    picking = true;
+    pickAlert("");
+  }
 }
 
-function addToPickList(text){
+function addToPickList(text) {
   var x = document.getElementById("pickList");
   var node = document.createElement('li');
   node.appendChild(document.createTextNode(text));
   x.appendChild(node);
 }
 
+function clearPickList() {
+  var x = document.getElementById("pickList");
+  while (x.firstChild) {
+    x.removeChild(x.firstChild);
+  }
+}
+
 function pickAlert(text) {
   var x = document.getElementById("pickIn");
   x.innerHTML = text;
-}
-
-function MoveBalls() {
-  balls.forEach((ball) => {
-    ball.move(deltaTime);
-    ball.display();
-  });
-}
-
-function DrawBowl() {
-  strokeWeight(1);
-  fill("#0f0");
-  circle(containerX, containerY, containerSize);
-}
-
-function DrawOuterRing() {
-  noFill();
-  strokeWeight(10);
-  circle(containerX, containerY, containerSize - 10);
 }
 
 class Ball {
@@ -146,11 +188,10 @@ class Ball {
       var newAngle = 2 * angleToCollisionPoint - oldAngle;
       this.dx = -v * Math.cos(newAngle);
       this.dy = v * Math.sin(newAngle);
-      
     }
   }
-  
-  get distance(){
-    return dist(this.x,this.y,this.containerX, this.containerY);
+
+  get distance() {
+    return dist(this.x, this.y, this.containerX, this.containerY);
   }
 }

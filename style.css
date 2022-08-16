@@ -5,35 +5,36 @@ body {
   background: #dce;
   align-items: center;
 }
+
 canvas {
   display: block;
   margin: 0 auto;
-}
-
-h1 {
-  margin: 20 auto;
-  text-align: center;
 }
 
 #pickInContainer
 {
   background:#222;
 }
+
 #pickIn {
   font-size: 12vw;
   color: #f33;
   margin: auto;
+  text-align:center;
   height: 12vw;
   animation: blink-animation .25s steps(5, start) infinite;
   -webkit-animation: blink-animation .25s steps(5, start) infinite;
 }
+
 @keyframes blink-animation {
   to {
     visibility: hidden;
   }
 }
+
 @-webkit-keyframes blink-animation {
   to {
     visibility: hidden;
   }
 }
+
