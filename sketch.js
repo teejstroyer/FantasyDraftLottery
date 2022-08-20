@@ -33,7 +33,7 @@ document.body.onload = function() {
 function setDimensions() {
   var minDim = min([windowWidth, windowHeight]);
   containerSize = minDim / 2;
-  canvasSize = containerSize + 10;
+  canvasSize = containerSize + containerSize / 6;
   containerX = canvasSize / 2;
   containerY = canvasSize / 2;
   ballSize = containerSize / 6;
@@ -50,7 +50,16 @@ function setup() {
 function windowResized() {
   setDimensions();
   resizeCanvas(canvasSize, canvasSize);
-  initializeTeams();
+  balls.forEach(ball => {
+    ball.size = ballSize;
+    ball.x = containerX;
+    ball.y = containerY;
+    ball.dx = Math.random() * ballSize - ballSize / 2;
+    ball.dy = Math.random() * ballSize - ballSize / 2;
+    ball.containerX = containerX;
+    ball.containerY = containerY;
+    ball.containerR = containerSize / 2 - ballSize / 3;
+  });
   render();
 }
 
@@ -73,7 +82,7 @@ function initializeTeams() {
         "#ffff",
         containerX,
         containerY,
-        containerSize / 2 - ballSize / 2
+        containerSize / 2
       )
     );
   }
@@ -108,6 +117,7 @@ function draw() {
     if (lastPick.size > containerSize) {
       lastPick.size = containerSize;
     }
+    strokeWeight(1);
     lastPick.display();
 
     if (lastPick.size == containerSize) {
@@ -135,8 +145,8 @@ function render() {
   });
 
   noFill();
-  strokeWeight(10);
-  circle(containerX, containerY, containerSize);
+  strokeWeight(15);
+  circle(containerX, containerY, containerSize+10);
 }
 
 function editTeams(caller) {
@@ -176,17 +186,23 @@ function makePick() {
 }
 
 function addToPickList(text) {
-  var x = document.getElementById("pickList");
-  var node = document.createElement('li');
-  node.appendChild(document.createTextNode(text));
-  x.appendChild(node);
+  var elements = document.getElementsByClassName("pickList");
+  elements.forEach(element => 
+    {
+      var node = document.createElement('li');
+      node.appendChild(document.createTextNode(text));
+      element.appendChild(node)
+    }
+  );
 }
 
 function clearPickList() {
-  var x = document.getElementById("pickList");
-  while (x.firstChild) {
-    x.removeChild(x.firstChild);
-  }
+  var elements = document.getElementsByClassName("pickList");
+  elements.forEach(element => {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  });
 }
 
 class Ball {
@@ -200,7 +216,7 @@ class Ball {
     this.dy = Math.random() * ballSize - ballSize / 2;
     this.containerX = containerX;
     this.containerY = containerY;
-    this.containerR = containerR;
+    this.containerR = containerR - ballSize / 3;
   }
 
   display() {
