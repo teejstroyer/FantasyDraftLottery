@@ -89,7 +89,6 @@ function draw() {
 
     balls.sort((b1, b2) => b1.distance - b2.distance);
     lastPick = balls.shift();
-    addToPickList(lastPick.name);
     setTeamsLeft();
     render();
   }
@@ -116,6 +115,8 @@ function draw() {
       fill("#000");
       textAlign(CENTER);
       text(lastPick.name, containerX, containerY);
+      addToPickList(lastPick.name);
+      lastPick = null;
     }
   }
 }
@@ -167,9 +168,10 @@ function setTeamsLeft() {
 }
 
 function makePick() {
-  if (balls.length > 0) {
-    picking = true;
-    lastPick = null;
+  if (!picking) {
+    if (balls.length > 0) {
+      picking = true;
+    }
   }
 }
 
