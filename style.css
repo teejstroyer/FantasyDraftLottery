@@ -38,3 +38,28 @@ canvas {
   }
 }
 
+.marquee {
+    font-size: 20px;
+    line-height: 30px;
+    height:30px;
+    width: 100%;
+    white-space: nowrap;
+    -moz-animation:  marquee 15s linear 0s infinite;
+    -webkit-animation:  marquee 15s linear 0s infinite;
+}
+@-moz-keyframes marquee { 
+    0% { margin-left:120%; } 100% { margin-left:-1000px; }  
+}
+@-webkit-keyframes marquee { 
+    0% { margin-left:120%; } 100% { margin-left:-1000px; }  
+}
+
+.horizontal-list, .horizontal-list li
+{
+  display: inline;
+  margin-right: 2em;
+}
+
+.ml-2 {
+  margin-left: 2em;
+}

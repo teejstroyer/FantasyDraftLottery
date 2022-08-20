@@ -23,7 +23,7 @@ document.body.onload = function() {
   getTeamsFromLocalStorage();
   teamInput = document.getElementById("teams-edit");
   teamText = document.getElementById("teams");
-  teamsRemaining = document.getElementById("remaining-teams");
+  teamsRemaining = document.getElementsByClassName("remaining-teams");
 
   var teamString = teams.join(',');
   teamInput.value = teamString;
@@ -98,7 +98,6 @@ function draw() {
 
     balls.sort((b1, b2) => b1.distance - b2.distance);
     lastPick = balls.shift();
-    setTeamsLeft();
     render();
   }
 
@@ -127,6 +126,7 @@ function draw() {
       text(lastPick.name, containerX, containerY);
       addToPickList(lastPick.name);
       lastPick = null;
+      setTeamsLeft();
     }
   }
 }
@@ -146,7 +146,7 @@ function render() {
 
   noFill();
   strokeWeight(15);
-  circle(containerX, containerY, containerSize+10);
+  circle(containerX, containerY, containerSize + 10);
 }
 
 function editTeams(caller) {
@@ -174,7 +174,19 @@ function editTeams(caller) {
 
 function setTeamsLeft() {
   const remainingNames = balls.map(i => i.name);
-  teamsRemaining.textContent = "Teams left:" + remainingNames.sort();
+  remainingNames.sort();
+
+  teamsRemaining.forEach(element => {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+
+    remainingNames.forEach(name => {
+      var node = document.createElement('li');
+      node.appendChild(document.createTextNode(name));
+      element.appendChild(node)
+    });
+  });
 }
 
 function makePick() {
@@ -187,12 +199,11 @@ function makePick() {
 
 function addToPickList(text) {
   var elements = document.getElementsByClassName("pickList");
-  elements.forEach(element => 
-    {
-      var node = document.createElement('li');
-      node.appendChild(document.createTextNode(text));
-      element.appendChild(node)
-    }
+  elements.forEach(element => {
+    var node = document.createElement('li');
+    node.appendChild(document.createTextNode(text));
+    element.appendChild(node)
+  }
   );
 }
 

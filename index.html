@@ -13,7 +13,7 @@
 
   <div>
     <label id="teams-label" for="teams-edit">Teams: </label>
-    <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;"/>
+    <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;" />
     <span id="teams">hello</span>
     <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);">
   </div>
@@ -25,12 +25,18 @@
   <input type="button" value="Pick" onclick="makePick()">
 
   <br />
-  <span id="remaining-teams">Teams left:</span>
+
+  <div class="marquee">
+    <span class="ml-2">Teams Left: </span>
+    <ul class="remaining-teams horizontal-list"></ul>
+    <span class="ml-2">Pick Order: </span>
+    <ol class="pickList horizontal-list"> </ol>
+  </div>
 
   <h2>Pick Order</h2>
   <ol class="pickList"> </ol>
 
-  <script src="sketch.js" ></script>
+  <script src="sketch.js"></script>
 </body>
 
 </html>
