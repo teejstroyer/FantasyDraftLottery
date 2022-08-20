@@ -5,24 +5,33 @@
   <script src="p5.js"></script>
   <script src="p5.sound.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css"
+    integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/grids-responsive-min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
 </head>
 
 <body>
   <h1>The Fanasty Fantasy Lottery</h1>
 
-  <div>
-    <label id="teams-label" for="teams-edit">Teams: </label>
-    <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;" />
-    <span id="teams">hello</span>
-    <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);">
+  <div class="pure-form pure-g">
+    <label id="teams-label" for="teams-edit" class="pure-u-1-5">Teams: </label>
+    <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;"
+      class="pure-u-3-5" />
+    <label id="teams" class="pure-u-3-5"></label>
+    <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);" class="pure-button pure-u-1-5">
   </div>
 
-  <!--P5 JS Canvas-->
-  <main></main>
-  <!--P5 JS Canvas-->
+  <div class="pickContainer">
+    <div class="pure-g pure-u-5-5 pickBtnContainer">
+      <input type="button" value="Pick" onclick="makePick()" class="pure-button pickBtn">
+    </div>
+    <!--P5 JS Canvas-->
+    <main></main>
+    <!--P5 JS Canvas-->
 
-  <input type="button" value="Pick" onclick="makePick()">
+  </div>
 
   <br />
 
