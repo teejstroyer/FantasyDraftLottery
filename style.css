@@ -1,14 +1,64 @@
+@font-face {
+  src: url(fonts/Silkscreen-Regular.ttf);
+  font-family: "Silkscreen";
+}
+
 html,
 body {
+  font-family: "Silkscreen";
   margin: 0;
   padding: 0;
   background: #dce;
   align-items: center;
+  text-align: center;
+  background-color: #C1D5A4;
+}
+.head{
+  margin-top: 0;
+  background-image: url(images/stadium.png);
+  height: 325px;
+  background-repeat:repeat-x;
+  color: #F0F2B6;
+  text-shadow: 5px 5px #0005;
 }
 
 canvas {
   display: block;
   margin: 0 auto;
+}
+
+#title{
+  font-size: 6rem;
+  margin-top: 0;
+}
+
+.team{
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#teams{
+  font-size: 2.5rem;
+}
+
+#teams-edit{
+  height: 40px;
+  width: 300px;
+  font-size: 1.5rem;
+}
+
+.buttons{
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  margin: 50px auto;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#lottery-background{
+  background-image: url(images/field.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .marquee {
@@ -21,6 +71,27 @@ canvas {
     -moz-animation:  marquee 15s linear 0s infinite;
     -webkit-animation:  marquee 15s linear 0s infinite;
 }
+
+.pick-list{
+  font-size: 2rem;
+  margin-left: 210px;
+}
+
+li{
+  font-size: 2.5rem;
+}
+
+#pick-order li{
+  font-size: 2.5rem;
+  margin: 15px 50px;
+  text-align: left;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgrey;
+  box-shadow: 5px 5px #0005;
+  width: 80%;
+}
+
 @keyframes marquee {
   0% { margin-left:120%; } 100% { margin-left:-1000px; }  
 }

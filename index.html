@@ -9,32 +9,38 @@
 </head>
 
 <body>
-  <h1>The Fanasty Fantasy Lottery</h1>
+  <div class="head">
+    <h1 id="title">The Fanasty Fantasy Lottery</h1>
+  </div>
+  
 
-  <div>
-    <label id="teams-label" for="teams-edit">Teams: </label>
+  <div id="team-entry">
+    <label class="team" id="teams-label" for="teams-edit">Teams: </label>
     <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;" />
     <span id="teams">hello</span>
-    <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);">
+    <input class="buttons" id="edit-teams-button" type="button" value="add" onclick="editTeams(this);">
   </div>
 
   <!--P5 JS Canvas-->
-  <main></main>
+  <div id="lottery-background">
+    <main></main>
+  </div>
+  
   <!--P5 JS Canvas-->
 
-  <input type="button" value="Pick" onclick="makePick()">
+  <input class="buttons" id="pick-team-btn" type="button" value="Pick" onclick="makePick()">
 
   <br />
 
   <div class="marquee">
-    <span class="ml-2">Teams Left: </span>
-    <ul class="remaining-teams horizontal-list"></ul>
-    <span class="ml-2">Pick Order: </span>
-    <ol class="pickList horizontal-list"> </ol>
+    <span class="ml-2 team">Teams Left: </span>
+    <ul class="remaining-teams horizontal-list teams"></ul>
+    <span class="ml-2 team">Pick Order: </span>
+    <ol class="pickList horizontal-list teams"> </ol>
   </div>
 
-  <h2>Pick Order</h2>
-  <ol class="pickList"> </ol>
+  <h2 class="team" id="pick-order">Pick Order</h2>
+  <ol id="pick-order" class="pickList"> </ol>
 
   <script src="sketch.js"></script>
 </body>
