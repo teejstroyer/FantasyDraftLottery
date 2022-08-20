@@ -173,20 +173,24 @@ function editTeams(caller) {
 }
 
 function setTeamsLeft() {
-  const remainingNames = balls.map(i => i.name);
-  remainingNames.sort();
+  if (balls) {
+    const remainingNames = balls.map(i => i.name);
+    if (remainingNames) {
+      remainingNames.sort();
 
-  teamsRemaining.forEach(element => {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
+      teamsRemaining.forEach(element => {
+        while (element.firstChild) {
+          element.removeChild(element.firstChild);
+        }
+
+        remainingNames.forEach(name => {
+          var node = document.createElement('li');
+          node.appendChild(document.createTextNode(name));
+          element.appendChild(node)
+        });
+      });
     }
-
-    remainingNames.forEach(name => {
-      var node = document.createElement('li');
-      node.appendChild(document.createTextNode(name));
-      element.appendChild(node)
-    });
-  });
+  }
 }
 
 function makePick() {
