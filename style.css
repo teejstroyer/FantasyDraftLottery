@@ -28,6 +28,7 @@ canvas {
 }
 
 #title{
+  padding-top: 5%;
   font-size: 6rem;
   margin-top: 0;
 }
