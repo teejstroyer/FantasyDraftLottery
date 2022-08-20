@@ -11,41 +11,18 @@ canvas {
   margin: 0 auto;
 }
 
-#pickInContainer
-{
-  background:#222;
-}
-
-#pickIn {
-  font-size: 12vw;
-  color: #f33;
-  margin: auto;
-  text-align:center;
-  height: 12vw;
-  animation: blink-animation .25s steps(5, start) infinite;
-  -webkit-animation: blink-animation .25s steps(5, start) infinite;
-}
-
-@keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-
-@-webkit-keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-
 .marquee {
     font-size: 20px;
     line-height: 30px;
     height:30px;
     width: 100%;
     white-space: nowrap;
+    animation: marquee 15s linear infinite;
     -moz-animation:  marquee 15s linear 0s infinite;
     -webkit-animation:  marquee 15s linear 0s infinite;
+}
+@keyframes marquee {
+  0% { margin-left:120%; } 100% { margin-left:-1000px; }  
 }
 @-moz-keyframes marquee { 
     0% { margin-left:120%; } 100% { margin-left:-1000px; }  
