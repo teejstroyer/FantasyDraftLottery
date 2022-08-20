@@ -1,9 +1,9 @@
 //Canvas Props
-let containerSize = 400;
-let canvasSize = containerSize + 10;
-let containerX = canvasSize / 2;
-let containerY = canvasSize / 2;
-let ballSize = containerSize / 6;
+let containerSize;
+let canvasSize;
+let containerX;
+let containerY;
+let ballSize;
 //AnimationProps
 let picking = false;
 let pickTime = 0;
@@ -17,6 +17,7 @@ let teamsRemaining;
 let balls = [];
 let teams = [];
 let selectedBalls = [];
+let lastPick;
 
 document.body.onload = function() {
   getTeamsFromLocalStorage();
@@ -29,10 +30,27 @@ document.body.onload = function() {
   teamText.textContent = teamString;
 }
 
+function setDimensions() {
+  var minDim = min([windowWidth, windowHeight]);
+  containerSize = minDim / 2;
+  canvasSize = containerSize + 10;
+  containerX = canvasSize / 2;
+  containerY = canvasSize / 2;
+  ballSize = containerSize / 6;
+}
+
 function setup() {
+  setDimensions();
+  frameRate(30);
   createCanvas(canvasSize, canvasSize);
   initializeTeams();
-  pickAlert("");
+  render();
+}
+
+function windowResized() {
+  setDimensions();
+  resizeCanvas(canvasSize, canvasSize);
+  initializeTeams();
   render();
 }
 
@@ -52,13 +70,14 @@ function initializeTeams() {
         containerX,
         containerY,
         ballSize,
-        "#fff9",
+        "#ffff",
         containerX,
         containerY,
         containerSize / 2 - ballSize / 2
       )
     );
   }
+  clearPickList();
   setTeamsLeft();
   render();
 }
@@ -69,17 +88,35 @@ function draw() {
     pickTime = 0;
 
     balls.sort((b1, b2) => b1.distance - b2.distance);
-    var pick = balls.shift();
-
-    pickAlert(pick.name);
-    addToPickList(pick.name);
-
+    lastPick = balls.shift();
+    addToPickList(lastPick.name);
     setTeamsLeft();
+    render();
   }
 
   if (picking) {
     pickTime += deltaTime;
     render();
+  }
+
+  if (lastPick) {
+    lastPick.x = containerX;
+    lastPick.y = containerY;
+
+    if (lastPick.size < containerSize) {
+      lastPick.size *= 1.05;
+    }
+    if (lastPick.size > containerSize) {
+      lastPick.size = containerSize;
+    }
+    lastPick.display();
+
+    if (lastPick.size == containerSize) {
+      textSize(containerSize / lastPick.name.length);
+      fill("#000");
+      textAlign(CENTER);
+      text(lastPick.name, containerX, containerY);
+    }
   }
 }
 
@@ -90,13 +127,15 @@ function render() {
   circle(containerX, containerY, containerSize);
 
   balls.forEach((ball) => {
-    ball.move(deltaTime);
+    if (picking) {
+      ball.move();
+    }
     ball.display();
   });
 
   noFill();
   strokeWeight(10);
-  circle(containerX, containerY, containerSize - 10);
+  circle(containerX, containerY, containerSize);
 }
 
 function editTeams(caller) {
@@ -130,7 +169,7 @@ function setTeamsLeft() {
 function makePick() {
   if (balls.length > 0) {
     picking = true;
-    pickAlert("");
+    lastPick = null;
   }
 }
 
@@ -148,11 +187,6 @@ function clearPickList() {
   }
 }
 
-function pickAlert(text) {
-  var x = document.getElementById("pickIn");
-  x.innerHTML = text;
-}
-
 class Ball {
   constructor(name, x, y, size, fill, containerX, containerY, containerR) {
     this.name = name;
@@ -160,12 +194,8 @@ class Ball {
     this.x = x;
     this.y = y;
     this.fill = fill;
-    this.dx =
-      (Math.random() < 0.5 ? 1 : -1) *
-      Math.floor((Math.random() * size) / 2 + 1);
-    this.dy =
-      (Math.random() < 0.5 ? 1 : -1) *
-      Math.floor((Math.random() * size) / 2 + 1);
+    this.dx = Math.random() * ballSize - ballSize / 2;
+    this.dy = Math.random() * ballSize - ballSize / 2;
     this.containerX = containerX;
     this.containerY = containerY;
     this.containerR = containerR;
@@ -179,11 +209,11 @@ class Ball {
   move() {
     this.x += this.dx;
     this.y += this.dy;
-    var dx = this.x - this.containerX;
-    var dy = this.y - this.containerY;
-    if (Math.sqrt(dx * dx + dy * dy) >= this.containerR - this.size / 2) {
+    var tdx = this.x - this.containerX;
+    var tdy = this.y - this.containerY;
+    if (Math.sqrt(tdx * tdx + tdy * tdy) >= this.containerR - this.size / 2) {
       var v = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-      var angleToCollisionPoint = Math.atan2(-dy, dx);
+      var angleToCollisionPoint = Math.atan2(-tdy, tdx);
       var oldAngle = Math.atan2(-this.dy, this.dx);
       var newAngle = 2 * angleToCollisionPoint - oldAngle;
       this.dx = -v * Math.cos(newAngle);
