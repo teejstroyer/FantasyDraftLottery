@@ -15,9 +15,6 @@ body {
 }
 .head{
   margin-top: 0;
-  background-image: url(images/stadium.png);
-  height: 325px;
-  background-repeat:repeat-x;
   color: #F0F2B6;
   text-shadow: 5px 5px #0005;
 }
@@ -28,18 +25,18 @@ canvas {
 }
 
 #title{
-  padding-top: 5%;
-  font-size: 6rem;
+  font-size: 4rem;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .team{
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 #teams{
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 #teams-edit{
@@ -49,17 +46,11 @@ canvas {
 }
 
 .buttons{
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 5px 10px;
-  margin: 50px auto;
+  margin: 10px auto;
   border-radius: 10px;
   font-weight: bold;
-}
-
-#lottery-background{
-  background-image: url(images/field.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 
 .marquee {
@@ -79,17 +70,21 @@ canvas {
 }
 
 li{
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+}
+
+#pick-order{
+  margin: 10px auto;
 }
 
 #pick-order li{
-  font-size: 2.5rem;
-  margin: 15px 50px;
+  font-size: 1.5rem;
+  margin: 7px 40px;
   text-align: left;
   border: 1px solid black;
   border-radius: 5px;
   background-color: lightgrey;
-  box-shadow: 5px 5px #0005;
+  box-shadow: 3px 3px #0005;
   width: 80%;
 }
 
