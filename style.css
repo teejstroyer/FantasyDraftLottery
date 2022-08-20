@@ -9,6 +9,7 @@ body {
 canvas {
   display: block;
   margin: 0 auto;
+  z-index: 1;
 }
 
 .marquee {
@@ -40,3 +41,23 @@ canvas {
 .ml-2 {
   margin-left: 2em;
 }
+
+.pickBtn{
+  position: inherit;
+  bottom: 0;
+  transform: translate(-50%, 0%);
+}
+
+.pickBtnContainer{
+  text-align: center;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+}
+
+.pickContainer 
+{
+  position: relative;
+  align-items: center;
+}
+
