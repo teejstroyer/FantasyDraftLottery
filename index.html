@@ -13,38 +13,42 @@
 </head>
 
 <body>
-  <h1>The Fanasty Fantasy Lottery</h1>
+  <div class="pure-g">
+    <div class="pure-u-5-5">
+      <h1>The Fanasty Fantasy Lottery</h1>
 
-  <div class="pure-form pure-g">
-    <label id="teams-label" for="teams-edit" class="pure-u-1-5">Teams: </label>
-    <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;"
-      class="pure-u-3-5" />
-    <label id="teams" class="pure-u-3-5"></label>
-    <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);" class="pure-button pure-u-1-5">
-  </div>
+      <div class="pure-form pure-g">
+        <label id="teams-label" for="teams-edit" class="pure-u-1-5">Teams: </label>
+        <input type="text" id="teams-edit" name="teams-edit" placeholder="team1, team2, team3" style="display:none;"
+          class="pure-u-3-5" />
+        <label id="teams" class="pure-u-3-5"></label>
+        <input id="edit-teams-button" type="button" value="add" onclick="editTeams(this);"
+          class="pure-button pure-u-1-5">
+      </div>
 
-  <div class="pickContainer">
-    <div class="pure-g pure-u-5-5 pickBtnContainer">
-      <input type="button" value="Pick" onclick="makePick()" class="pure-button pickBtn">
+      <div class="pickContainer">
+        <div class="pure-g pure-u-5-5 pickBtnContainer">
+          <input type="button" value="Pick" onclick="makePick()" class="pure-button pickBtn">
+        </div>
+        <!--P5 JS Canvas-->
+        <main></main>
+        <!--P5 JS Canvas-->
+
+      </div>
+
+      <br />
+
+      <div class="marquee">
+        <span class="ml-2">Teams Left: </span>
+        <ul class="remaining-teams horizontal-list"></ul>
+        <span class="ml-2">Pick Order: </span>
+        <ol class="pickList horizontal-list"> </ol>
+      </div>
+
+      <h2>Pick Order</h2>
+      <ol class="pickList"> </ol>
     </div>
-    <!--P5 JS Canvas-->
-    <main></main>
-    <!--P5 JS Canvas-->
-
   </div>
-
-  <br />
-
-  <div class="marquee">
-    <span class="ml-2">Teams Left: </span>
-    <ul class="remaining-teams horizontal-list"></ul>
-    <span class="ml-2">Pick Order: </span>
-    <ol class="pickList horizontal-list"> </ol>
-  </div>
-
-  <h2>Pick Order</h2>
-  <ol class="pickList"> </ol>
-
   <script src="sketch.js"></script>
 </body>
 
