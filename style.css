@@ -1,3 +1,18 @@
+/*
+#7C788A
+#BAB0D6
+#C1D5A4
+#8A5C6D
+#D69AB0
+#FFFFFF
+#000000
+*/
+
+@font-face {
+  src: url(Silkscreen/Silkscreen-Regular.ttf);
+  font-family: "Silkscreen";
+}
+
 html,
 body {
   margin: 0;
@@ -6,6 +21,26 @@ body {
   align-items: center;
   max-width: 100%;
   overflow-x: hidden;
+  color: #000 !important;
+  font-family: "Silkscreen";
+  background-color: #C1D5A4;
+}
+
+h1{
+  font-size: 3rem;
+  color: #7c788a;
+  text-shadow:
+    3px 3px 0 #8A5C6D,
+    -3px -3px 0 #8A5C6D,  
+    3px -3px 0 #8A5C6D,
+    -3px 3px 0 #8A5C6D,
+    3px 3px 0 #8A5C6D;
+}
+
+h2
+{
+  font-size: 2rem;
+  padding:1rem;
 }
 
 canvas {
@@ -14,24 +49,30 @@ canvas {
   z-index: 1;
 }
 
+.marquee-container {
+  background-color: #000;
+  width: 100%;
+  margin: 1em 0;
+}
 .marquee {
-    font-size: 20px;
-    line-height: 30px;
-    height:30px;
-    width: 100%;
-    white-space: nowrap;
-    animation: marquee 15s linear infinite;
-    -moz-animation:  marquee 15s linear 0s infinite;
-    -webkit-animation:  marquee 15s linear 0s infinite;
+  color: #BAB0D6;
+  font-size: 3em;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  -moz-animation:  marquee 15s linear 0s infinite;
+  -webkit-animation:  marquee 15s linear 0s infinite;
 }
 @keyframes marquee {
-  0% { margin-left:120%; } 100% { margin-left:-1000px; }  
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
 }
 @-moz-keyframes marquee { 
-    0% { margin-left:120%; } 100% { margin-left:-1000px; }  
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
 }
 @-webkit-keyframes marquee { 
-    0% { margin-left:120%; } 100% { margin-left:-1000px; }  
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
 }
 
 .horizontal-list, .horizontal-list li
@@ -44,22 +85,40 @@ canvas {
   margin-left: 2em;
 }
 
-.pickBtn{
-  position: inherit;
-  bottom: 0;
-  transform: translate(-50%, 0%);
-}
-
-.pickBtnContainer{
-  text-align: center;
-  height: 100%;
-  position: absolute;
-  align-items: center;
-}
-
 .pickContainer 
 {
-  position: relative;
   align-items: center;
 }
+.text-button
+{
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.text-button:hover
+{
+  color: #D69AB0;
+  text-shadow:
+    0 0 0 #000,
+    0 0 0 #000,
+    0 0 0 #000,
+    0 0 0 #000,
+    0 0 0 #000;
+}
 
+.card
+{
+  background-color: #7C788A;
+  color: #FFFFFF;
+}
