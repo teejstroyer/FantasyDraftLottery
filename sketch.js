@@ -132,9 +132,9 @@ function draw() {
 }
 
 function render() {
-  //background('#f00');
+  //background('#000');
   strokeWeight(1);
-  fill("#0f0");
+  fill("#bab0d6");
   circle(containerX, containerY, containerSize);
 
   balls.forEach((ball) => {
