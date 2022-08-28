@@ -122,6 +122,7 @@ function draw() {
     if (lastPick.size == containerSize) {
       textSize(containerSize / lastPick.name.length);
       fill("#000");
+      textFont('Silkscreen');
       textAlign(CENTER);
       text(lastPick.name, containerX, containerY);
       addToPickList(lastPick.name);
@@ -134,7 +135,7 @@ function draw() {
 function render() {
   //background('#000');
   strokeWeight(1);
-  fill("#bab0d6");
+  fill("#058c42");
   circle(containerX, containerY, containerSize);
 
   balls.forEach((ball) => {
@@ -146,7 +147,7 @@ function render() {
 
   noFill();
   strokeWeight(15);
-  circle(containerX, containerY, containerSize + 10);
+  circle(containerX, containerY, containerSize + 15);
 }
 
 function editTeams(caller) {

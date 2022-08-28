@@ -1,0 +1,141 @@
+//#7C788A
+//#BAB0D6
+//#C1D5A4
+//#8A5C6D
+//#D69AB0
+//#FFFFFF
+//#000000
+//#020202
+//#0d2818
+//#04471c
+//#058c42
+//#16db65
+
+@background-color: #04471c;
+@base-font-color: #16db65;
+@h1-inner-color: #ffffff;
+@h1-outer-color: #020202;
+@marquee-color:#FFFFFF;
+@marquee-container-color: #020202;
+@text-button-inner-color: #ffffff;
+@text-button-outer-color: #16db65;
+@card-text-color: #ffffff;
+@card-background-color:#020202;
+
+@font-face {
+  src: url(Silkscreen/Silkscreen-Regular.ttf);
+  font-family: "Silkscreen";
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: @background-color;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  color: @base-font-color !important;
+  font-family: "Silkscreen";
+  background-color: @background-color;
+}
+
+h1{
+  font-size: 4rem;
+  color: @h1-inner-color;
+  text-shadow:
+  3px 3px 0 @h1-outer-color,
+  -3px -3px 0 @h1-outer-color,  
+  3px -3px 0 @h1-outer-color,
+  -3px 3px 0 @h1-outer-color,
+  3px 3px 0 @h1-outer-color;
+}
+
+h2
+{
+  font-size: 2rem;
+  padding:1rem;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.marquee-container {
+  background-color: @marquee-container-color;
+  width: 100%;
+  margin:0 0 1em 0;
+}
+.marquee {
+  color: @marquee-color;
+  font-size: 3em;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  -moz-animation:  marquee 15s linear 0s infinite;
+  -webkit-animation:  marquee 15s linear 0s infinite;
+}
+@keyframes marquee {
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
+}
+@-moz-keyframes marquee { 
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
+}
+@-webkit-keyframes marquee { 
+  from {transform:translateX(120%)}
+  to {transform:translateX(-150em)}
+}
+
+.horizontal-list, .horizontal-list li
+{
+  display: inline;
+  margin-right: 2em;
+}
+
+.ml-2 {
+  margin-left: 2em;
+}
+
+.pickContainer 
+{
+  align-items: center;
+}
+.text-button
+{
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 1.5rem;
+  color: @text-button-inner-color;
+
+  text-shadow:
+  0 0 0 @text-button-outer-color,
+  0 0 0 @text-button-outer-color,
+  0 0 0 @text-button-outer-color,
+  0 0 0 @text-button-outer-color,
+  0 0 0 @text-button-outer-color;
+
+}
+.text-button:hover
+{
+  color: @text-button-inner-color;
+  text-shadow:
+  1px 1px 0 @text-button-outer-color,
+  -1px -1px 0 @text-button-outer-color,  
+  1px -1px 0 @text-button-outer-color,
+  -1px 1px 0 @text-button-outer-color,
+  1px 1px 0 @text-button-outer-color;
+}
+
+.card
+{
+  background-color: @card-background-color;
+  color: @card-text-color;
+  margin-top: 3em;
+}
